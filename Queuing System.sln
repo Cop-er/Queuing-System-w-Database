@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.34320.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queuing System", "Queuing System\Queuing System.csproj", "{B8B1960C-50B8-45D0-BFCF-35F4A4C43CA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queu Numbers", "Queu Numbers\Queu Numbers.csproj", "{B191ADEF-DFD2-4962-94D7-11D9EB91FF6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8B1960C-50B8-45D0-BFCF-35F4A4C43CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B1960C-50B8-45D0-BFCF-35F4A4C43CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B1960C-50B8-45D0-BFCF-35F4A4C43CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B1960C-50B8-45D0-BFCF-35F4A4C43CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B191ADEF-DFD2-4962-94D7-11D9EB91FF6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B191ADEF-DFD2-4962-94D7-11D9EB91FF6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B191ADEF-DFD2-4962-94D7-11D9EB91FF6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B191ADEF-DFD2-4962-94D7-11D9EB91FF6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E62DF44-F5DC-41FE-8C7C-D6FCE087DA5D}
+	EndGlobalSection
+EndGlobal
