@@ -532,6 +532,7 @@
             this.label15.Size = new System.Drawing.Size(496, 208);
             this.label15.TabIndex = 10;
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label15.DoubleClick += new System.EventHandler(this.label15_DoubleClick);
             // 
             // Main
             // 

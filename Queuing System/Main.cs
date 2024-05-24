@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Synthesis;
 using SimpleTCP;
+using MongoDB.Driver;
+using MongoDB.Bson;
+
 
 namespace Queuing_System
 {
@@ -19,12 +22,17 @@ namespace Queuing_System
             InitializeComponent();
         }
 
-        private string ipAddress = "192.168.4.109";
+        private string ipAddress = "192.168.4.103";
         private string portNumber = "8910";
         SimpleTcpServer server;
+        private readonly string _collectionName = "QueuingSystemDatabase";
+        private readonly string _databaseconnection = "mongodb://192.168.4.103:27017";
 
-        private void Main_Load(object sender, EventArgs e)
+        private async void Main_Load(object sender, EventArgs e)
         {
+            mongodb_connection con = new mongodb_connection();
+            con.ConnectToMongoDB();
+
             server = new SimpleTcpServer();
             server.Delimiter = 0x13;
             server.StringEncoder = Encoding.UTF8;
@@ -37,6 +45,7 @@ namespace Queuing_System
 
             clearButton();
             StartServer();
+            await con.SaveData();
             axWindowsMediaPlayer1.Focus();
         }
 
@@ -199,5 +208,17 @@ namespace Queuing_System
             callNumber(tableName, numberText);
         }
 
+        private async void label15_DoubleClick(object sender, EventArgs e)
+        {
+            mongodb_connection con = new mongodb_connection();
+            con.ConnectToMongoDB();
+            await con.UpdateData("x");
+
+            var result = MessageBox.Show("Are you sure you want to close the application?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            if (result == DialogResult.OK)
+            {
+                this.Close();
+            }
+        }
     }
 }
