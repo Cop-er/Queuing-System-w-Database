@@ -415,6 +415,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1024, 768);
             this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // t3
             // 
@@ -532,6 +533,7 @@
             this.label15.Size = new System.Drawing.Size(496, 208);
             this.label15.TabIndex = 10;
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label15.Click += new System.EventHandler(this.label15_Click);
             this.label15.DoubleClick += new System.EventHandler(this.label15_DoubleClick);
             // 
             // Main

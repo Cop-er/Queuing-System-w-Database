@@ -56,17 +56,24 @@ namespace Queuing_System
 
         public async Task RetriveData()
         {
+            try { 
             var collection = Database.GetCollection<BsonDocument>(mongodb_connection.CollectionName);
             var filter = Builders<BsonDocument>.Filter.Eq("DateString", dt.ToShortDateString());
             var document = await collection.Find(filter).FirstOrDefaultAsync();
 
-            t1.Text = document.GetValue("EmesilBirth", "").AsString;
-            t2.Text = document.GetValue("JomaryDeath", "").AsString;
-            t3.Text = document.GetValue("HelenMarriage", "").AsString;
-            t4.Text = document.GetValue("NikkiCTC", "").AsString;
-            t5.Text = document.GetValue("DonCourt", "").AsString;
-            t6.Text = document.GetValue("NikkiLegitimationEdorsementsLegitimation", "").AsString;
-            t7.Text = document.GetValue("FrechieCorrection", "").AsString;
+            t1.Text = Convert.ToInt32(document.GetValue("EmesilBirth", defaultValue: "0").AsString).ToString();
+            t2.Text = Convert.ToInt32(document.GetValue("JomaryDeath", defaultValue: "0").AsString).ToString();
+            t3.Text = Convert.ToInt32(document.GetValue("HelenMarriage", defaultValue: "0").AsString).ToString();
+            t4.Text = Convert.ToInt32(document.GetValue("NikkiCTC", defaultValue: "0").AsString).ToString();
+            t5.Text = Convert.ToInt32(document.GetValue("DonCourt", defaultValue: "0").AsString).ToString();
+            t6.Text = Convert.ToInt32(document.GetValue("NikkiLegitimationEdorsementsLegitimation", defaultValue: "0").AsString).ToString();
+            t7.Text = Convert.ToInt32(document.GetValue("FrechieCorrection", defaultValue: "0").AsString).ToString();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error Floi :" + ex.Message);
+            }
+
         }
 
         public async Task UpdateData(string dt)
@@ -121,6 +128,18 @@ namespace Queuing_System
             }
         }
 
+        private static int intMust(String ifx)
+        {
+            if (int.TryParse(ifx, out int parsedValue))
+            {
+                return parsedValue;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         private void Server_DataReceived(object sender, SimpleTCP.Message e)
         {
             string message = e.MessageString.Trim((char)server.Delimiter);
@@ -129,7 +148,8 @@ namespace Queuing_System
             if (parts.Length == 2)
             {
                 string target = parts[0].Trim();
-                string content = parts[1].Trim();
+                string content1 = parts[1].Trim();
+                string content = intMust(content1).ToString();
 
                 this.Invoke((MethodInvoker)delegate
                 {
@@ -185,15 +205,21 @@ namespace Queuing_System
 
         private void t1_TextChanged(object sender, EventArgs e)
         {
+            try { 
             TextBox typeText = sender as TextBox;
             string tableName = q1.Text;
-            string numberText = typeText.Text;
+            int numberText = int.Parse(typeText.Text);
             callNumber(tableName, numberText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
-        private void callNumber(string x1, string x2)
+        private async void callNumber(string x1, int x2)
         {
-            if (x2 != "") { 
+            if (x2 != 0) { 
             SpeechSynthesizer _ss = new SpeechSynthesizer();
             axWindowsMediaPlayer1.Ctlcontrols.pause();
             for (int i = 1; i<3; i++) { 
@@ -202,55 +228,93 @@ namespace Queuing_System
             }
             axWindowsMediaPlayer1.Ctlcontrols.play();
             axWindowsMediaPlayer1.Focus();
+
+            await UpdateData(dt.ToShortDateString());
             }
         }
 
         private void t2_TextChanged(object sender, EventArgs e)
         {
+            try { 
             TextBox typeText = sender as TextBox;
             string tableName = q2.Text;
-            string numberText = typeText.Text;
+            int numberText = int.Parse(typeText.Text);
             callNumber(tableName, numberText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void t3_TextChanged(object sender, EventArgs e)
         {
+            try { 
             TextBox typeText = sender as TextBox;
             string tableName = q3.Text;
-            string numberText = typeText.Text;
+            int numberText = int.Parse(typeText.Text);
             callNumber(tableName, numberText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void t4_TextChanged(object sender, EventArgs e)
         {
+            try { 
             TextBox typeText = sender as TextBox;
             string tableName = q4.Text;
-            string numberText = typeText.Text;
+            int numberText = int.Parse(typeText.Text);
             callNumber(tableName, numberText);
         }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+}
 
         private void t5_TextChanged(object sender, EventArgs e)
         {
+            try { 
             TextBox typeText = sender as TextBox;
             string tableName = q5.Text;
-            string numberText = typeText.Text;
+            int numberText = int.Parse(typeText.Text);
             callNumber(tableName, numberText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void t6_TextChanged(object sender, EventArgs e)
         {
+            try { 
             TextBox typeText = sender as TextBox;
             string tableName = q6.Text;
-            string numberText = typeText.Text;
+            int numberText = int.Parse(typeText.Text);
             callNumber(tableName, numberText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void t7_TextChanged(object sender, EventArgs e)
         {
+            try { 
             TextBox typeText = sender as TextBox;
             string tableName = q7.Text;
-            string numberText = typeText.Text;
+            int numberText = int.Parse(typeText.Text);
             callNumber(tableName, numberText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void label15_DoubleClick(object sender, EventArgs e)
@@ -268,6 +332,16 @@ namespace Queuing_System
         private async void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             await UpdateData(dt.ToShortDateString());
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SimpleTCP;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Queu_Numbers
 {
@@ -20,14 +22,34 @@ namespace Queu_Numbers
             this.logs = lgn;
         }
 
-        private string ipAddress = "192.168.4.109";
+        private string ipAddress = "192.168.4.103";
         private string portNumber = "8910";
         private string c1 = "";
+        private MongoClient clientDatabase;
+        private IMongoDatabase Database;
+        private DateTime dt = DateTime.Now;
+
+        private int t1 = 0;
+        private int t2 = 0;
+        private int t3 = 0;
+        private int t4 = 0;
+        private int t5 = 0;
+        private int t6 = 0;
+        private int t7 = 0;
+
         SimpleTcpClient client;
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            passData("add");
+            var x = await RetriveData();
+            if (x)
+            {
+                Console.WriteLine(x);
+                passData("add");
+                x = false;
+            }
+            Console.WriteLine(x);
+
         }
 
         private async void passData(string nk)
@@ -151,8 +173,15 @@ namespace Queu_Numbers
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
+            MongodbConnection con = new MongodbConnection();
+            con.ConnectToMongoDB();
+            clientDatabase = con.GetClient();
+            Database = con.GetDatabase();
+            await con.SaveData();
+            await RetriveData();
+
             this.Text = logs.textBox1.Text.ToUpper();
             limits();
             
@@ -169,6 +198,8 @@ namespace Queu_Numbers
                 MessageBox.Show(ex.Message);
                 this.Close();
             }
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -212,5 +243,23 @@ namespace Queu_Numbers
                 }
             }
         }
+
+        public async Task<bool> RetriveData()
+        {
+            var collection = Database.GetCollection<BsonDocument>(MongodbConnection.CollectionName);
+            var filter = Builders<BsonDocument>.Filter.Eq("DateString", dt.ToShortDateString());
+            var document = await collection.Find(filter).FirstOrDefaultAsync();
+
+            t1 = document.GetValue("EmesilBirth", "").AsInt32;
+            t2 = document.GetValue("JomaryDeath", "").AsInt32;
+            t3 = document.GetValue("HelenMarriage", "").AsInt32;
+            t4 = document.GetValue("NikkiCTC", "").AsInt32;
+            t5 = document.GetValue("DonCourt", "").AsInt32;
+            t6 = document.GetValue("NikkiLegitimationEdorsementsLegitimation", "").AsInt32;
+            t7 = document.GetValue("FrechieCorrection", "").AsInt32;
+
+            return true;
+        }
+
     }
 }
