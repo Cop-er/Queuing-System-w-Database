@@ -25,6 +25,8 @@ namespace Queu_Numbers
         private string ipAddress = "192.168.4.103";
         private string portNumber = "8910";
         private string c1 = "";
+        private string limiter = "";
+
         private MongoClient clientDatabase;
         private IMongoDatabase Database;
         private DateTime dt = DateTime.Now;
@@ -44,12 +46,9 @@ namespace Queu_Numbers
             var x = await RetriveData();
             if (x)
             {
-                Console.WriteLine(x);
                 passData("add");
                 x = false;
             }
-            Console.WriteLine(x);
-
         }
 
         private async void passData(string nk)
@@ -58,28 +57,51 @@ namespace Queu_Numbers
             {
                 if (int.TryParse(label1.Text, out int number))
                 {
-                    label1.Text = "***";
-                    this.Enabled = false;
-                    await Task.Delay(1000);
-
-                    int incrementedNumber = number;
-                    if (nk == "add")
+                    foreach (Control control in tableLayoutPanel3.Controls)
                     {
-                        incrementedNumber = number + 1;
-                    }
-                    else if (nk == "sub")
-                    {
-                        incrementedNumber = number - 1;
+                        if (control is RadioButton radioButton)
+                        {
+                            if (radioButton.Checked)
+                            {
+                                limiter = radioButton.Tag.ToString();
+                            }
+                        }
                     }
 
-                    scanRadio();
+                    int limiterx = int.Parse(limiter);
+                    if (number <= limiterx)
+                    {
 
-                    string message = $"{c1}:" + incrementedNumber.ToString();
 
-                    client.WriteLineAndGetReply(message, TimeSpan.FromSeconds(2));
-                    await Task.Delay(8000);
-                    label1.Text = incrementedNumber.ToString();
+                        label1.Text = "***";
+                        this.Enabled = false;
+                        await Task.Delay(1000);
 
+                        int incrementedNumber = number;
+                        if (nk == "add")
+                        {
+                            incrementedNumber = number + 1;
+                        }
+                        else if (nk == "sub")
+                        {
+                            incrementedNumber = number - 1;
+                        }
+
+                        scanRadio();
+
+                        string message = $"{c1}:" + incrementedNumber.ToString();
+
+                        client.WriteLineAndGetReply(message, TimeSpan.FromSeconds(2));
+                        await Task.Delay(8000);
+                        label1.Text = incrementedNumber.ToString();
+
+
+                    }
+                    else
+                    {
+                        label1.Text = number.ToString();
+                        MessageBox.Show("wew");
+                    }
                 }
                 else
                 {
@@ -131,7 +153,6 @@ namespace Queu_Numbers
         private void limits()
         {
             string vl = this.Text;
-
             switch (vl)
             {
                 case "FLOI":
@@ -175,6 +196,8 @@ namespace Queu_Numbers
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            this.Text = logs.textBox1.Text.ToUpper();
+
             MongodbConnection con = new MongodbConnection();
             con.ConnectToMongoDB();
             clientDatabase = con.GetClient();
@@ -182,12 +205,11 @@ namespace Queu_Numbers
             await con.SaveData();
             await RetriveData();
 
-            this.Text = logs.textBox1.Text.ToUpper();
             limits();
-            
 
-            try {
-                radioButton1.Checked = true;
+            try
+            {
+                //radioButton1.Checked = true;
             client = new SimpleTcpClient();
             client.StringEncoder = Encoding.UTF8;
             client.DataReceived += Client_DataReceived;
@@ -202,20 +224,30 @@ namespace Queu_Numbers
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
-            passData("sub");
+            var x = await RetriveData();
+            if (x)
+            {
+                passData("sub");
+                x = false;
+            }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
-            passData("");
-
+            var x = await RetriveData();
+            if (x)
+            {
+                passData("");
+                x = false;
+            }
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private async void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-
+            await RetriveData();
+            label2.Text = $"Logs and Maximum Client Number: {t1.ToString()}";
         }
 
         private void scanRadio ()
@@ -258,8 +290,58 @@ namespace Queu_Numbers
             t6 = document.GetValue("NikkiLegitimationEdorsementsLegitimation", "").AsInt32;
             t7 = document.GetValue("FrechieCorrection", "").AsInt32;
 
+            radioButton1.Tag = t1;
+            radioButton2.Tag = t2;
+            radioButton3.Tag = t3;
+            radioButton4.Tag = t4;
+            radioButton5.Tag = t5;
+            radioButton6.Tag = t6;
+            radioButton7.Tag = t7;
+
             return true;
         }
 
+        private async void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            await RetriveData();
+            label2.Text = $"Logs and Maximum Client Number: {t2.ToString()}";
+
+
+        }
+
+        private async void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            await RetriveData();
+            label2.Text = $"Logs and Maximum Client Number: {t3.ToString()}";
+
+        }
+
+        private async void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            await RetriveData();
+            label2.Text = $"Logs and Maximum Client Number: {t4.ToString()}";
+
+        }
+
+        private async void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            await RetriveData();
+            label2.Text = $"Logs and Maximum Client Number: {t5.ToString()}";
+
+        }
+
+        private async void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            await RetriveData();
+            label2.Text = $"Logs and Maximum Client Number: {t6.ToString()}";
+
+        }
+
+        private async void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            await RetriveData();
+            label2.Text = $"Logs and Maximum Client Number: {t7.ToString()}";
+
+        }
     }
 }
