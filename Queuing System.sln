@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queuing System", "Queuing S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queu Numbers", "Queu Numbers\Queu Numbers.csproj", "{B191ADEF-DFD2-4962-94D7-11D9EB91FF6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientReceiving", "ClientReceiving\ClientReceiving.csproj", "{9691D209-EE46-4328-84B7-9B3A741D1418}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B191ADEF-DFD2-4962-94D7-11D9EB91FF6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B191ADEF-DFD2-4962-94D7-11D9EB91FF6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B191ADEF-DFD2-4962-94D7-11D9EB91FF6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9691D209-EE46-4328-84B7-9B3A741D1418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9691D209-EE46-4328-84B7-9B3A741D1418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9691D209-EE46-4328-84B7-9B3A741D1418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9691D209-EE46-4328-84B7-9B3A741D1418}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

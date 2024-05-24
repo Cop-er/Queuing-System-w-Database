@@ -88,14 +88,11 @@ namespace Queu_Numbers
                         }
 
                         scanRadio();
-
                         string message = $"{c1}:" + incrementedNumber.ToString();
-
                         client.WriteLineAndGetReply(message, TimeSpan.FromSeconds(2));
                         await Task.Delay(8000);
                         label1.Text = incrementedNumber.ToString();
-
-
+                        label2.Text = $"Logs and Maximum Client Number: {limiterx}";
                     }
                     else
                     {
