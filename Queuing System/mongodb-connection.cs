@@ -1,23 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using System.Linq;
 
 namespace Queuing_System
 {
     class mongodb_connection
     {
-        public MongoClient client;
-        public IMongoDatabase database;
-        private readonly string _collectionName = "QueuingSystemDatabase";
-        private readonly string _databaseconnection = "mongodb://192.168.4.103:27017";
+        public static string CollectionName { get; } = "QueuingSystemDatabase";
+        public static string DatabaseConnection { get; } = "mongodb://192.168.4.103:27017";
+
+        public MongoClient Client { get; private set; }
+        public IMongoDatabase Database { get; private set; }
+
+        public MongoClient GetClient()
+        {
+            return Client;
+        }
+
+        public IMongoDatabase GetDatabase()
+        {
+            return Database;
+        }
 
         public async Task Run()
         {
-            var collection = database.GetCollection<BsonDocument>(_collectionName);
+            var collection = Database.GetCollection<BsonDocument>(CollectionName);
             var filter = Builders<BsonDocument>.Filter.Eq("OwnerOfSystemAndDatabase", "Floi");
             var documents = await collection.Find(filter).ToListAsync();
             foreach (var document in documents)
@@ -26,9 +35,9 @@ namespace Queuing_System
             }
         }
 
-        public async Task<bool> DateCheck(String dt, string col)
+        public async Task<bool> DateCheck(string dt, string col)
         {
-            var collection = database.GetCollection<BsonDocument>(col);
+            var collection = Database.GetCollection<BsonDocument>(col);
             var filter = Builders<BsonDocument>.Filter.Eq("DateString", dt);
             var documents = await collection.Find(filter).ToListAsync();
             return documents.Any();
@@ -37,42 +46,36 @@ namespace Queuing_System
         public async Task SaveData()
         {
             DateTime dt = DateTime.Now;
-            bool x = await DateCheck(dt.ToShortDateString(), _collectionName);
-            if (x == false)
+            bool x = await DateCheck(dt.ToShortDateString(), CollectionName);
+            if (!x)
             {
-                var collection = database.GetCollection<BsonDocument>(_collectionName);
+                var collection = Database.GetCollection<BsonDocument>(CollectionName);
                 var mld = new BsonDocument
                 {
-                  { "Province", "Surigao Del Sur" },
-                  { "City", "City of Bislig" },
-                  { "OwnerOfSystemAndDatabase", "Floi" },
-                  {"Date", dt},
-                  {"DateString", dt.ToShortDateString()},
-
-                  {"EmesilBirth", 0},
-                  {"JomaryDeath", 0},
-                  {"HelenMarriage", 0},
-                  {"NikkiCTC", 0},
-                  {"DonCourt", 0},
-                  {"NikkiLegitimationEdorsementsLegitimation", 0},
-                  {"FrechieCorrection", 0},
+                    { "Province", "Surigao Del Sur" },
+                    { "City", "City of Bislig" },
+                    { "OwnerOfSystemAndDatabase", "Floi" },
+                    { "Date", dt },
+                    { "DateString", dt.ToShortDateString() },
+                    { "EmesilBirth", 0 },
+                    { "JomaryDeath", 0 },
+                    { "HelenMarriage", 0 },
+                    { "NikkiCTC", 0 },
+                    { "DonCourt", 0 },
+                    { "NikkiLegitimationEdorsementsLegitimation", 0 },
+                    { "FrechieCorrection", 0 }
                 };
-
-
-                Console.WriteLine("1");
                 await collection.InsertOneAsync(mld);
             }
-            Console.WriteLine("2");
-
         }
 
         public void ConnectToMongoDB()
         {
             try
             {
-                var settings = MongoClientSettings.FromConnectionString(_databaseconnection);
-                client = new MongoClient(settings);
-                database = client.GetDatabase("myDatabase");
+                var settings = MongoClientSettings.FromConnectionString(DatabaseConnection);
+                Client = new MongoClient(settings);
+                Database = Client.GetDatabase("myDatabase");
                 Console.WriteLine("Connected to MongoDB successfully.");
             }
             catch (Exception ex)
@@ -84,8 +87,7 @@ namespace Queuing_System
 
         public async Task UpdateData(string dt)
         {
-            dt = "5/24/2024";
-            var collection = database.GetCollection<BsonDocument>(_collectionName);
+            var collection = Database.GetCollection<BsonDocument>(CollectionName);
             var filter = Builders<BsonDocument>.Filter.Eq("DateString", dt);
             var update = Builders<BsonDocument>.Update
                 .Set("EmesilBirth", 5)
@@ -104,9 +106,5 @@ namespace Queuing_System
                 Console.WriteLine("No documents matched the filter or no modifications were made.");
             }
         }
-
-
-
-
     }
 }

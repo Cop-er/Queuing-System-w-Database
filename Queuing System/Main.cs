@@ -24,14 +24,17 @@ namespace Queuing_System
 
         private string ipAddress = "192.168.4.103";
         private string portNumber = "8910";
+        private MongoClient client;
+        private IMongoDatabase Database;
+        private DateTime dt = DateTime.Now;
         SimpleTcpServer server;
-        private readonly string _collectionName = "QueuingSystemDatabase";
-        private readonly string _databaseconnection = "mongodb://192.168.4.103:27017";
 
         private async void Main_Load(object sender, EventArgs e)
         {
             mongodb_connection con = new mongodb_connection();
             con.ConnectToMongoDB();
+            client = con.GetClient();
+            Database = con.GetDatabase();
 
             server = new SimpleTcpServer();
             server.Delimiter = 0x13;
@@ -45,8 +48,50 @@ namespace Queuing_System
 
             clearButton();
             StartServer();
-            await con.SaveData();
             axWindowsMediaPlayer1.Focus();
+
+            await con.SaveData();
+            await RetriveData();
+        }
+
+        public async Task RetriveData()
+        {
+            var collection = Database.GetCollection<BsonDocument>(mongodb_connection.CollectionName);
+            var filter = Builders<BsonDocument>.Filter.Eq("DateString", dt.ToShortDateString());
+            var document = await collection.Find(filter).FirstOrDefaultAsync();
+
+            t1.Text = document.GetValue("EmesilBirth", "").AsString;
+            t2.Text = document.GetValue("JomaryDeath", "").AsString;
+            t3.Text = document.GetValue("HelenMarriage", "").AsString;
+            t4.Text = document.GetValue("NikkiCTC", "").AsString;
+            t5.Text = document.GetValue("DonCourt", "").AsString;
+            t6.Text = document.GetValue("NikkiLegitimationEdorsementsLegitimation", "").AsString;
+            t7.Text = document.GetValue("FrechieCorrection", "").AsString;
+        }
+
+        public async Task UpdateData(string dt)
+        {
+                var collection = Database.GetCollection<BsonDocument>(mongodb_connection.CollectionName);
+                var filter = Builders<BsonDocument>.Filter.Eq("DateString", dt);
+                var update = Builders<BsonDocument>.Update
+                    .Set("EmesilBirth", t1.Text)
+                    .Set("JomaryDeath", t2.Text)
+                    .Set("HelenMarriage", t3.Text)
+                    .Set("NikkiCTC", t4.Text)
+                    .Set("DonCourt", t5.Text)
+                    .Set("NikkiLegitimationEdorsementsLegitimation", t6.Text)
+                    .Set("FrechieCorrection", t7.Text);
+
+            var result = await collection.UpdateOneAsync(filter, update);
+                if (result.IsAcknowledged && result.ModifiedCount > 0)
+                {
+                    Console.WriteLine("Document updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("No documents matched the filter or no modifications were made.");
+                }
+            
         }
 
         private void clearButton()
@@ -66,7 +111,7 @@ namespace Queuing_System
             try
             {
                 //t7.Text += "Server Starting ..." + Environment.NewLine;
-                MessageBox.Show("Server Starting");
+                //MessageBox.Show("Server Starting");
                 var ip = System.Net.IPAddress.Parse(ipAddress);
                 server.Start(ip, Convert.ToInt32(portNumber));
             }
@@ -208,17 +253,21 @@ namespace Queuing_System
             callNumber(tableName, numberText);
         }
 
-        private async void label15_DoubleClick(object sender, EventArgs e)
+        private void label15_DoubleClick(object sender, EventArgs e)
         {
             mongodb_connection con = new mongodb_connection();
             con.ConnectToMongoDB();
-            await con.UpdateData("x");
 
             var result = MessageBox.Show("Are you sure you want to close the application?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
             if (result == DialogResult.OK)
             {
                 this.Close();
             }
+        }
+
+        private async void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            await UpdateData(dt.ToShortDateString());
         }
     }
 }
