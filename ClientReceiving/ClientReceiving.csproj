@@ -103,6 +103,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MongodbConnection.cs" />
     <Compile Include="ReceivingPrint.cs">
       <SubType>Form</SubType>
     </Compile>
