@@ -31,11 +31,51 @@ namespace ClientReceiving
         private int t6 = 0;
         private int t7 = 0;
 
+        private static string tType;
+        private static object tFinal;
+
 
         private void button1_Click(object sender, EventArgs e)
         {
-           incrementNumber(1);
+            incrementNumber(1);
+            printRDLC(sender);
         }
+
+        private static void printRDLC(object sender)
+        {
+            if (sender is Button xmen)
+            { 
+            tType = xmen.Text;
+            tFinal = xmen.Tag;
+
+            PrintingData.Type = tType;
+            PrintingData.valx = tFinal.ToString();
+
+            PrintingData pd = new PrintingData();
+            pd.ShowDialog();
+
+            }
+        }
+
+        
+
+        private void printNumbering()
+        {
+            printPreviewDialog1.Document = printDocument1;
+            printDocument1.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("pprnm", 285, 200);
+            printPreviewDialog1.ShowDialog();
+        }
+
+        private static void clickBot(object sender)
+        {
+            if (sender is Button x)
+            {
+                tType = x.Text;
+                tFinal = x.Tag;
+                MessageBox.Show($"{tType} {tFinal}");
+            }
+        }
+
 
         private async void incrementNumber(int index)
         {
@@ -71,6 +111,14 @@ namespace ClientReceiving
             label6.Text = "Total = 0";
             label7.Text = "Total = 0";
 
+            button1.Tag = 1;
+            button2.Tag = 2;
+            button3.Tag = 3;
+            button4.Tag = 4;
+            button5.Tag = 5;
+            button6.Tag = 6;
+            button7.Tag = 7;
+
             try { 
             MongodbConnection con = new MongodbConnection();
             con.ConnectToMongoDB();
@@ -92,6 +140,14 @@ namespace ClientReceiving
                 label5.Text = $"Total = {t5}";
                 label6.Text = $"Total = {t6}";
                 label7.Text = $"Total = {t7}";
+
+                button1.Tag = t1;
+                button2.Tag = t2;
+                button3.Tag = t3;
+                button4.Tag = t4;
+                button5.Tag = t5;
+                button6.Tag = t6;
+                button7.Tag = t7;
             }
         }
 
@@ -101,13 +157,13 @@ namespace ClientReceiving
             var filter = Builders<BsonDocument>.Filter.Eq("DateString", dt.ToShortDateString());
             var document = await collection.Find(filter).FirstOrDefaultAsync();
 
-            t1 = document.GetValue("EmesilBirth", "").AsInt32;
-            t2 = document.GetValue("JomaryDeath", "").AsInt32;
-            t3 = document.GetValue("HelenMarriage", "").AsInt32;
-            t4 = document.GetValue("NikkiCTC", "").AsInt32;
-            t5 = document.GetValue("DonCourt", "").AsInt32;
-            t6 = document.GetValue("NikkiLegitimationEdorsementsLegitimation", "").AsInt32;
-            t7 = document.GetValue("FrechieCorrection", "").AsInt32;
+            t1 = document.GetValue("EmesilBirth", 0).AsInt32;
+            t2 = document.GetValue("JomaryDeath", 0).AsInt32;
+            t3 = document.GetValue("HelenMarriage", 0).AsInt32;
+            t4 = document.GetValue("NikkiCTC", 0).AsInt32;
+            t5 = document.GetValue("DonCourt", 0).AsInt32;
+            t6 = document.GetValue("NikkiLegitimationEdorsementsLegitimation", 0).AsInt32;
+            t7 = document.GetValue("FrechieCorrection", 0).AsInt32;
 
             return true;
         }
@@ -141,36 +197,54 @@ namespace ClientReceiving
         private void button2_Click(object sender, EventArgs e)
         {
             incrementNumber(2);
+            printRDLC(sender);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             incrementNumber(3);
+            printRDLC(sender);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             incrementNumber(4);
+            printRDLC(sender);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             incrementNumber(5);
+            printRDLC(sender);
         }
 
         private void button7_Click_1(object sender, EventArgs e)
         {
             incrementNumber(7);
+            printRDLC(sender);
         }
 
         private void button6_Click_1(object sender, EventArgs e)
         {
             incrementNumber(6);
+            printRDLC(sender);
         }
 
         private void button5_Click_1(object sender, EventArgs e)
         {
             incrementNumber(5);
+            printRDLC(sender);
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawString($"{tType}" , new Font("Arial", 12), Brushes.Black, new Point(10,10));
+            e.Graphics.DrawString($"{tFinal}" , new Font("Arial", 40), Brushes.Black, new Point(10,30));
+        }
+
+        private void printPreviewDialog1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
