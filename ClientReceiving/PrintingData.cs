@@ -14,8 +14,8 @@ namespace ClientReceiving
     public partial class PrintingData : Form
     {
 
-        public static string Type;
-        public static string valx;
+        public string Type;
+        public string valx;
 
         public PrintingData()
         {
@@ -38,6 +38,10 @@ namespace ClientReceiving
 
             reportViewer1.LocalReport.SetParameters(reportParameters);
             reportViewer1.RefreshReport();
+
+            reportViewer1.PrintDialog();
+            MessageBox.Show("wew");
+            this.Close();
         }
     }
 }
