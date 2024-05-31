@@ -16,6 +16,7 @@ namespace ClientReceiving
 
         public string Type;
         public string valx;
+        public DateTime dt = DateTime.Now;
 
         public PrintingData()
         {
@@ -33,15 +34,14 @@ namespace ClientReceiving
 
             ReportParameter param1 = new ReportParameter("TypeOfEntry", Type);
             ReportParameter param2 = new ReportParameter("TotalValue", valx);
+            ReportParameter param3 = new ReportParameter("DateNow", dt.ToString());
             reportParameters.Add(param1);
             reportParameters.Add(param2);
+            reportParameters.Add(param3);
 
             reportViewer1.LocalReport.SetParameters(reportParameters);
             reportViewer1.RefreshReport();
 
-            reportViewer1.PrintDialog();
-            MessageBox.Show("wew");
-            this.Close();
         }
     }
 }

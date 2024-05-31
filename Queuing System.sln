@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queu Numbers", "Queu Number
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientReceiving", "ClientReceiving\ClientReceiving.csproj", "{9691D209-EE46-4328-84B7-9B3A741D1418}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ClientReceivingDeployment", "ClientReceivingDeployment\ClientReceivingDeployment.vdproj", "{28626B24-2401-4965-B19F-974ED1AD1B02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{9691D209-EE46-4328-84B7-9B3A741D1418}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9691D209-EE46-4328-84B7-9B3A741D1418}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9691D209-EE46-4328-84B7-9B3A741D1418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28626B24-2401-4965-B19F-974ED1AD1B02}.Debug|Any CPU.ActiveCfg = Debug
+		{28626B24-2401-4965-B19F-974ED1AD1B02}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

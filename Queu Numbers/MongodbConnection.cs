@@ -9,7 +9,7 @@ namespace Queu_Numbers
     class MongodbConnection
     {
         public static string CollectionName { get; } = "forEntryControl";
-        public static string DatabaseConnection { get; } = "mongodb://192.168.4.103:27017";
+        public static string DatabaseConnection { get; } = "mongodb://192.168.4.56:27017";
 
         public MongoClient Client { get; private set; }
         public IMongoDatabase Database { get; private set; }

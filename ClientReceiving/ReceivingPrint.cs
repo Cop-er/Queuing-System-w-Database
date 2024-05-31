@@ -34,6 +34,40 @@ namespace ClientReceiving
         private static string tType;
         private static object tFinal;
 
+        private static string handlingPerson;
+
+
+        private static void codingName(string choiceOf)
+        {
+            if (choiceOf == "button1")
+            {
+                handlingPerson = "D";
+            }
+            else if (choiceOf == "button2")
+            {
+                handlingPerson = "J";
+            }
+            else if (choiceOf == "button3")
+            {
+                handlingPerson = "H";
+            }
+            else if (choiceOf == "button4")
+            {
+                handlingPerson = "I";
+            }
+            else if (choiceOf == "button5")
+            {
+                handlingPerson = "N";
+            }
+            else if (choiceOf == "button6")
+            {
+                handlingPerson = "F";
+            }
+            else if (choiceOf == "button7")
+            {
+                handlingPerson = "D";
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -55,20 +89,23 @@ namespace ClientReceiving
 
         private static void printRDLC(object sender)
         {
+
             if (sender is Button xmen)
             { 
             tType = xmen.Text;
             tFinal = xmen.Tag;
+                codingName(xmen.Name);
 
-            PrintingData pd = new PrintingData();
-                pd.Type = tType;
-                pd.valx = tFinal.ToString();
+
+                Console.WriteLine(xmen.Name);
+
+                PrintingData pd = new PrintingData();
+                pd.Type = $"{tType}";
+                pd.valx = $"{handlingPerson}{tFinal.ToString()}";
             pd.ShowDialog();
 
             }
         }
-
-        
 
         private void printNumbering()
         {

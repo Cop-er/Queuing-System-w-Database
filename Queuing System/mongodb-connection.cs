@@ -9,7 +9,7 @@ namespace Queuing_System
     class mongodb_connection
     {
         public static string CollectionName { get; } = "QueuingSystemDatabase";
-        public static string DatabaseConnection { get; } = "mongodb://192.168.4.103:27017";
+        public static string DatabaseConnection { get; } = "mongodb://192.168.4.56:27017";
 
         public MongoClient Client { get; private set; }
         public IMongoDatabase Database { get; private set; }
