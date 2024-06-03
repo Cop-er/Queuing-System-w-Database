@@ -39,31 +39,39 @@ namespace ClientReceiving
 
         private static void codingName(string choiceOf)
         {
-            if (choiceOf == "button1")
+            List<string> validChoices1 = new List<string> { "button1", "button8", "button9" };
+            List<string> validChoices2 = new List<string> { "button2", "button10" };
+            List<string> validChoices3 = new List<string> { "button3", "button11", "button12", "button13" };
+            List<string> validChoices4 = new List<string> { "button4", "button15"};
+            List<string> validChoices5 = new List<string> { "button5", "button16", "button17" };
+            List<string> validChoices6 = new List<string> { "button6", "button18", "button19", "button20", "button21" };
+            List<string> validChoices7 = new List<string> { "button7" };
+
+            if (validChoices1.Contains(choiceOf))
             {
                 handlingPerson = "D";
             }
-            else if (choiceOf == "button2")
+            else if (validChoices2.Contains(choiceOf))
             {
                 handlingPerson = "J";
             }
-            else if (choiceOf == "button3")
+            else if (validChoices3.Contains(choiceOf))
             {
                 handlingPerson = "H";
             }
-            else if (choiceOf == "button4")
+            else if (validChoices4.Contains(choiceOf))
             {
                 handlingPerson = "I";
             }
-            else if (choiceOf == "button5")
+            else if (validChoices5.Contains(choiceOf))
             {
                 handlingPerson = "N";
             }
-            else if (choiceOf == "button6")
+            else if (validChoices6.Contains(choiceOf))
             {
                 handlingPerson = "F";
             }
-            else if (choiceOf == "button7")
+            else if (validChoices7.Contains(choiceOf))
             {
                 handlingPerson = "D";
             }
@@ -79,12 +87,31 @@ namespace ClientReceiving
         private void UpdatedDataNow ()
         {
             button1.Tag = t1.ToString();
+            button8.Tag = t1.ToString();
+            button9.Tag = t1.ToString();
+
             button2.Tag = t2.ToString();
+            button10.Tag = t2.ToString();
+
             button3.Tag = t3.ToString();
+            button11.Tag = t3.ToString();
+            button12.Tag = t3.ToString();
+            button13.Tag = t3.ToString();
+
             button4.Tag = t4.ToString();
+            button15.Tag = t4.ToString();
+
             button5.Tag = t5.ToString();
+
             button6.Tag = t6.ToString();
+            button16.Tag = t6.ToString();
+            button17.Tag = t6.ToString();
+
             button7.Tag = t7.ToString();
+            button18.Tag = t7.ToString();
+            button19.Tag = t7.ToString();
+            button20.Tag = t7.ToString();
+            button21.Tag = t7.ToString();
         }
 
         private static void printRDLC(object sender)
@@ -102,16 +129,31 @@ namespace ClientReceiving
                 PrintingData pd = new PrintingData();
                 pd.Type = $"{tType}";
                 pd.valx = $"{handlingPerson}{tFinal.ToString()}";
-            pd.ShowDialog();
-
+                pd.ShowDialog();
             }
         }
 
-        private void printNumbering()
+        private void printNumberingX()
         {
             printPreviewDialog1.Document = printDocument1;
             printDocument1.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("pprnm", 285, 200);
             printPreviewDialog1.ShowDialog();
+        }
+
+        private void printNumbering(Object sender)
+        {
+            if (sender is Button xme)
+            {
+                tType = xme.Text;
+                tFinal = xme.Tag;
+                codingName(xme.Name);
+            }
+
+            printDocument1.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(10,10,10,10);
+            printDocument1.OriginAtMargins = true;
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            printNumberingX();
+            printDocument1.Print();
         }
 
         private static void clickBot(object sender)
@@ -151,7 +193,7 @@ namespace ClientReceiving
 
         private async void ReceivingPrint_Load(object sender, EventArgs e)
         {
-
+            //778, 600
             label1.Text = "Total = 0";
             label2.Text = "Total = 0";
             label3.Text = "Total = 0";
@@ -260,16 +302,24 @@ namespace ClientReceiving
             printRDLC(sender);
         }
 
-        private void button7_Click_1(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
+        {
+            incrementNumber(6);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
         {
             incrementNumber(7);
             UpdatedDataNow();
             printRDLC(sender);
         }
 
+
         private void button6_Click_1(object sender, EventArgs e)
         {
-            incrementNumber(6);
+            incrementNumber(7);
             UpdatedDataNow();
             printRDLC(sender);
         }
@@ -283,11 +333,107 @@ namespace ClientReceiving
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            e.Graphics.DrawString($"{tType}" , new Font("Arial", 12), Brushes.Black, new Point(10,10));
-            e.Graphics.DrawString($"{tFinal}" , new Font("Arial", 40), Brushes.Black, new Point(10,30));
+            Font typeFont = new Font("Arial", 12);
+            Font finalFont = new Font("Arial", 40);
+            Point typePosition = new Point(10, 10);
+            Point finalPosition = new Point(10, 30);
+
+            e.Graphics.DrawString(tType, typeFont, Brushes.Black, typePosition);
+            e.Graphics.DrawString($"{handlingPerson}{tFinal}", finalFont, Brushes.Black, finalPosition);
         }
 
-        private void printPreviewDialog1_Load(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
+        {
+            incrementNumber(1);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            incrementNumber(1);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            incrementNumber(2);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            incrementNumber(3);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            incrementNumber(3);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            incrementNumber(3);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            incrementNumber(4);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            incrementNumber(6);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            incrementNumber(6);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            incrementNumber(7);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            incrementNumber(7);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            incrementNumber(7);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            incrementNumber(7);
+            UpdatedDataNow();
+            printRDLC(sender);
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }

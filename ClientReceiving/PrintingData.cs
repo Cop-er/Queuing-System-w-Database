@@ -43,5 +43,25 @@ namespace ClientReceiving
             reportViewer1.RefreshReport();
 
         }
+
+        private void reportViewer1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void reportViewer1_RenderingComplete(object sender, RenderingCompleteEventArgs e)
+        {
+            try {
+            reportViewer1.PrintDialog();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                //this.Close();
+            }
+        }
     }
 }

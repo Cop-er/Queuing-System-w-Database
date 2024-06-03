@@ -1330,13 +1330,13 @@
         "Entry"
         {
         "MsmKey" = "8:_7D63CFB92182D1108B5026ACFE8A2045"
-        "OwnerKey" = "8:_CD231F07BDFB4A4C824432996ABA88AC"
+        "OwnerKey" = "8:_3AE28E0E43D33035D4052FD6A92A907E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_7D63CFB92182D1108B5026ACFE8A2045"
-        "OwnerKey" = "8:_3AE28E0E43D33035D4052FD6A92A907E"
+        "OwnerKey" = "8:_CD231F07BDFB4A4C824432996ABA88AC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2110,12 +2110,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3AE28E0E43D33035D4052FD6A92A907E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_CD231F07BDFB4A4C824432996ABA88AC"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2410,12 +2404,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7D63CFB92182D1108B5026ACFE8A2045"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_008101D9B3DF0A4B2FE3C8A6545BE216"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2449,6 +2437,18 @@
         "OwnerKey" = "8:_07EF866FA7EBA931CBD7FA794D075790"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3AE28E0E43D33035D4052FD6A92A907E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7D63CFB92182D1108B5026ACFE8A2045"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -2467,6 +2467,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -2483,6 +2499,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -6991,7 +7015,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ClientReceivingDeployment"
         "ProductCode" = "8:{42745A82-843E-4CD4-9F40-9C0570FB1A62}"
-        "PackageCode" = "8:{09D5CC7B-AE70-4BBA-99AF-15ECBD511277}"
+        "PackageCode" = "8:{E97C98A5-F18F-48E2-873A-BDC394C0BB03}"
         "UpgradeCode" = "8:{C2DF8D2C-58D6-41A2-9737-F75FE5F31B83}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
