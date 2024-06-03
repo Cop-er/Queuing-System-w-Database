@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientReceiving", "ClientRe
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ClientReceivingDeployment", "ClientReceivingDeployment\ClientReceivingDeployment.vdproj", "{28626B24-2401-4965-B19F-974ED1AD1B02}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "QueuingSystemDeployment", "QueuingSystemDeployment\QueuingSystemDeployment.vdproj", "{7681B2F6-8E77-41B2-BC55-86296E5576D1}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "QueuNumbersDeployment", "QueuNumbersDeployment\QueuNumbersDeployment.vdproj", "{1F16342E-400D-4F35-8D60-7590383386BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,10 @@ Global
 		{9691D209-EE46-4328-84B7-9B3A741D1418}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28626B24-2401-4965-B19F-974ED1AD1B02}.Debug|Any CPU.ActiveCfg = Debug
 		{28626B24-2401-4965-B19F-974ED1AD1B02}.Release|Any CPU.ActiveCfg = Release
+		{7681B2F6-8E77-41B2-BC55-86296E5576D1}.Debug|Any CPU.ActiveCfg = Debug
+		{7681B2F6-8E77-41B2-BC55-86296E5576D1}.Release|Any CPU.ActiveCfg = Release
+		{1F16342E-400D-4F35-8D60-7590383386BF}.Debug|Any CPU.ActiveCfg = Debug
+		{1F16342E-400D-4F35-8D60-7590383386BF}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

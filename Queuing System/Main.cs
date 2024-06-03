@@ -343,5 +343,10 @@ namespace Queuing_System
         {
 
         }
+
+        private void axWindowsMediaPlayer1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -69,5 +69,15 @@ namespace Queuing_System.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] LeAnn_Rimes___I_Need_You__Official_Music_Video_ {
+            get {
+                object obj = ResourceManager.GetObject("LeAnn_Rimes___I_Need_You__Official_Music_Video_", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

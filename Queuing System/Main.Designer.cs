@@ -518,6 +518,7 @@
             this.tableLayoutPanel1.SetRowSpan(this.axWindowsMediaPlayer1, 9);
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(496, 534);
             this.axWindowsMediaPlayer1.TabIndex = 9;
+            this.axWindowsMediaPlayer1.Enter += new System.EventHandler(this.axWindowsMediaPlayer1_Enter);
             // 
             // label15
             // 
